@@ -25,6 +25,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         ...action.payload
       }
+      
 
   }
 }

@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import starwarsApi from "../services/starwarsApi.js"
 
-export const Characters = () => {
 
+export const Vehicles = () => {
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
-        starwarsApi.getPeopleData().then(data => dispatch({
+        starwarsApi.getData().then(data => dispatch({
             type: 'getData',
             payload: {
-                people: data
+                vehicles: data
             }
+
         }))
     }, [])
 
     return (
         <div className="text-center mt-5 container">
-            <h1 className="text-start">Characters</h1>
+            <h1 className="text-start">Vehicles</h1>
             <div
                 style={{
                     display: "flex",
@@ -27,9 +27,9 @@ export const Characters = () => {
                     padding: "10px 0"
                 }}
             >
-                {store.people?.map((ppl) => (
+                {store.vehicles?.map((vehicle) => (
                     <div
-                        key={ppl._id}
+                        key={vehicle._id}
                         style={{
                             minWidth: "250px",
                             flex: "0 0 auto",
@@ -40,13 +40,13 @@ export const Characters = () => {
                             backgroundColor: "#f8f8f8"
                         }}
                     >
-                        <h4 className="text-start">{ppl.properties.name}</h4>
-                        <p className="text-start">Gender: {ppl.properties.gender}</p>
-                        <p className="text-start">Hair: {ppl.properties.hair_color}</p>
-                        <p className="text-start">Eye Color: {ppl.properties.eye_color}</p>
+                        <h4 className="text-start">{vehicle.properties.name}</h4>
+                        <p className="text-start">Model: {vehicle.properties.model}</p>
+                        <p className="text-start">Manufacturer: {vehicle.properties.manufacturer}</p>
+
                     </div>
                 ))}
             </div>
         </div>
     );
-}
+}; 
