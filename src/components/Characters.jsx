@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import starwarsApi from "../services/starwarsApi.js"
+import starWars from "../assets/img/starwars.png"
 
 export const Characters = () => {
 
@@ -40,12 +41,21 @@ export const Characters = () => {
                             backgroundColor: "#f8f8f8"
                         }}
                     >
-                        <h4 className="text-start">{ppl.properties.name}</h4>
-                        <p className="text-start">Gender: {ppl.properties.gender}</p>
+                        <img src={starWars} style={{ width: '250px' }}></img>
+                        <h4 className="text-start mt-3">{ppl.properties.name}</h4>
+                        <p className="text-start mt-4">Gender: {ppl.properties.gender}</p>
                         <p className="text-start">Hair: {ppl.properties.hair_color}</p>
                         <p className="text-start">Eye Color: {ppl.properties.eye_color}</p>
+                        <div className="d-flex justify-content-between">
+                            <button className="btn btn-outline-primary btn-sm">
+                                Learn More!
+                            </button>
+                            <button className="btn btn-outline-warning btn-sm text-warning"
+                            > 💛</button>
+                        </div>
                     </div>
                 ))}
+
             </div>
         </div>
     );
