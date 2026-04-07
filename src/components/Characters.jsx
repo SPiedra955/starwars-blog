@@ -9,7 +9,8 @@ export const Characters = () => {
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
-        starwarsApi.getPeopleData().then(data => dispatch({
+        const params = 'people'
+        starwarsApi.getData(params).then(data => dispatch({
             type: 'getData',
             payload: {
                 people: data

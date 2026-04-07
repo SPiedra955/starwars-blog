@@ -6,7 +6,8 @@ export const Vehicles = () => {
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
-        starwarsApi.getData().then(data => dispatch({
+        const params = 'vehicles'
+        starwarsApi.getData(params).then(data => dispatch({
             type: 'getData',
             payload: {
                 vehicles: data

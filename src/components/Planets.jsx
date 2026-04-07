@@ -8,7 +8,8 @@ export const Planets = () => {
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
-        starwarsApi.getPlanetData().then(data => dispatch({
+        const params = 'planets'
+        starwarsApi.getData(params).then(data => dispatch({
             type: 'getData',
             payload: {
                 planet: data

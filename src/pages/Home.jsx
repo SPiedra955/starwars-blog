@@ -7,20 +7,8 @@ import { Planets } from "../components/Planets.jsx";
 import { Vehicles } from "../components/Vehicles.jsx";
 export const Home = () => {
 
-	const { store, dispatch } = useGlobalReducer()
-	useEffect(() => {
-		starwarsApi.getData().then(data => dispatch({
-			type: 'getData',
-			payload: {
-				films: data
-			}
-
-		}))
-	}, [])
-
 	return (
-		<div className="text-center mt-5 container">
-			<h1>Star wars API</h1>
+		<div className="text-center mt-5 container-fluid">
 			<Characters></Characters>
 			<Planets></Planets>
 			<Vehicles></Vehicles>
