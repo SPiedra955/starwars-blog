@@ -49,6 +49,13 @@ export const Vehicles = () => {
                                 Learn More!
                             </button>
                             <button className="btn btn-outline-warning btn-sm text-warning"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    dispatch({
+                                        type: 'add_fav',
+                                        payload: vehicle.properties.name
+                                    })
+                                }}
                             > 💛</button>
                         </div>
                     </div>

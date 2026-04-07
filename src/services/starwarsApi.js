@@ -1,5 +1,5 @@
 const starwarsApi = {}
-const url = 'https://www.swapi.tech/api/'
+const url = 'https://swapi.tech/api'
 
 starwarsApi.getData = async (params) => {
     try {

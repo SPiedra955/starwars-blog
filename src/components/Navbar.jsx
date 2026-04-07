@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import starWarsImg from "../assets/img/image.png"
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Navbar = () => {
 
+	const { store, dispatch } = useGlobalReducer()
+	console.log(store.favorites)
 	return (
 		<nav className="navbar navbar-light bg-light container-fluid px-4 d-flex ">
 			<div className="">
@@ -11,15 +14,17 @@ export const Navbar = () => {
 			<div className="">
 				<h1>Starwars Api</h1>
 			</div>
+
 			<div className="">
-				<div class="btn-group">
-					<button class="btn btn-primary dropdown-toggle btn-md" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Favorites <span class="badge text-bg-secondary">4</span>
+				<div className="btn-group">
+					<button className="btn btn-primary dropdown-toggle btn-md" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Favorites <span className="badge text-bg-secondary">{store.favorites.length}</span>
 					</button>
-					<ul class="dropdown-menu dropdown-menu-lg-end">
-						<li><a class="dropdown-item" href="#">Action</a></li>
-						<li><a class="dropdown-item" href="#">Another action</a></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
+					<ul className="dropdown-menu dropdown-menu-lg-end">
+						{store.favorites?.map((fav, index) => (
+							<li key={index}><a className="dropdown-item" href="#">{fav}</a></li>
+						))}
+			
 					</ul>
 				</div>
 			</div>

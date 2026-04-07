@@ -52,6 +52,13 @@ export const Characters = () => {
                                 Learn More!
                             </button>
                             <button className="btn btn-outline-warning btn-sm text-warning"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    dispatch({
+                                        type: 'add_fav',
+                                        payload: ppl.properties.name
+                                    })
+                                }}
                             > 💛</button>
                         </div>
                     </div>
