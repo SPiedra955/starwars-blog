@@ -1,8 +1,10 @@
 export const initialStore = () => {
+  const localFavorites = localStorage.getItem('favorites')
+
   return {
     message: null,
     films: [],
-    favorites: [],
+    favorites: localFavorites ? JSON.parse(localFavorites) : [],
     todos: [
       {
         id: 1,

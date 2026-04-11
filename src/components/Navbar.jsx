@@ -22,9 +22,18 @@ export const Navbar = () => {
 					</button>
 					<ul className="dropdown-menu dropdown-menu-lg-end">
 						{store.favorites?.map((fav, index) => (
-							<li key={index}><a className="dropdown-item" href="#">{fav}</a></li>
+							<li key={index} className="d-flex"><a className="dropdown-item" href="#">{fav}</a>
+								<span className="mx-3" style={{ cursor: "pointer" }} onClick={(e) => {
+                                    e.preventDefault()
+									e.stopPropagation()
+                                    dispatch({
+                                        type: 'deleteFav',
+                                        payload: fav
+                                    })
+                                }}>🗑️</span>
+							</li>
 						))}
-			
+
 					</ul>
 				</div>
 			</div>
