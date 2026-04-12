@@ -13,8 +13,13 @@ export function StoreProvider({ children }) {
     const [store, dispatch] = useReducer(storeReducer, initialStore())
     // Provide the store and dispatch method to all child components.
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(store.favorites));
-    }, [store.favorites]);
+        if (!store?.favorites) return;
+
+        localStorage.setItem(
+            "favorites",
+            JSON.stringify(store.favorites)
+        );
+    }, [store?.favorites]);
     return <StoreContext.Provider value={{ store, dispatch }}>
         {children}
     </StoreContext.Provider>

@@ -7,7 +7,18 @@ starwarsApi.getData = async (params) => {
         if (!resp.ok) throw new Error('Something went wrong')
         const data = await resp.json()
         console.log(data.results)
-        return data.results
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+starwarsApi.getRecord = async (param, id) => {
+    try {
+        const resp = await fetch(`${url}/${param}/${id}`)
+        if (!resp.ok) throw new Error('Something went wrong')
+        const data = await resp.json()
+        return data.result
     } catch (error) {
         return error
     }

@@ -3,17 +3,17 @@ import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import starwarsApi from "../services/starwarsApi.js"
 import starWars from "../assets/img/starwars.png"
+import { useNavigate } from "react-router-dom";
 
 export const Planets = () => {
+    const navigate = useNavigate()
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
         const params = 'planets'
         starwarsApi.getData(params).then(data => dispatch({
-            type: 'getData',
-            payload: {
-                planet: data
-            }
+            type: 'getPlanets',
+            payload: data.results || data
         }))
     }, [])
 
@@ -28,7 +28,7 @@ export const Planets = () => {
                     padding: "10px 0"
                 }}
             >
-                {store.planet?.map((plan) => (
+                {store.planets?.map((plan) => (
                     <div
                         key={plan._id}
                         style={{
@@ -46,7 +46,9 @@ export const Planets = () => {
                         <p className="text-start mt-4">Population: {plan.properties.population}</p>
                         <p className="text-start">Terrain: {plan.properties.terrain}</p>
                         <div className="d-flex justify-content-between">
-                            <button className="btn btn-outline-primary btn-sm">
+                            <button className="btn btn-outline-primary btn-sm"
+                                onClick={() => navigate(`/planets/${plan.uid}`)}
+                            >
                                 Learn More!
                             </button>
                             <button className="btn btn-outline-warning btn-sm text-warning"

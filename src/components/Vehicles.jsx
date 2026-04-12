@@ -2,17 +2,17 @@ import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import starwarsApi from "../services/starwarsApi.js"
 import starWars from "../assets/img/starwars.png"
+import { useNavigate } from "react-router-dom";
+
 export const Vehicles = () => {
+    const navigate = useNavigate()
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
         const params = 'vehicles'
         starwarsApi.getData(params).then(data => dispatch({
-            type: 'getData',
-            payload: {
-                vehicles: data
-            }
-
+            type: 'getVehicles',
+            payload: data.results || data
         }))
     }, [])
 
@@ -45,7 +45,9 @@ export const Vehicles = () => {
                         <p className="text-start mt-4">Model: {vehicle.properties.model}</p>
                         <p className="text-start">Manufacturer: {vehicle.properties.manufacturer}</p>
                         <div className="d-flex justify-content-between">
-                            <button className="btn btn-outline-primary btn-sm">
+                            <button className="btn btn-outline-primary btn-sm"
+                                onClick={() => navigate(`/vehicles/${vehicle.uid}`)}
+                            >
                                 Learn More!
                             </button>
                             <button className="btn btn-outline-warning btn-sm text-warning"

@@ -8,7 +8,7 @@ import { Vehicles } from "../components/Vehicles.jsx";
 export const Home = () => {
 
 	return (
-		<div className="text-center mt-5 container-fluid">
+		<div className="mt-5 container">
 			<Characters></Characters>
 			<Planets></Planets>
 			<Vehicles></Vehicles>

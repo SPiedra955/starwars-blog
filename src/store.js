@@ -4,6 +4,7 @@ export const initialStore = () => {
   return {
     message: null,
     films: [],
+    people: [],
     favorites: localFavorites ? JSON.parse(localFavorites) : [],
     todos: [
       {
@@ -23,6 +24,36 @@ export const initialStore = () => {
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
 
+    case 'getPeople':
+      return {
+        ...store,
+        people: action.payload
+      };
+
+    case 'planet':
+      return {
+        ...store,
+        planet: action.payload
+      };
+
+    case 'getPlanets':
+      return {
+        ...store,
+        planets: action.payload
+      };
+
+    case 'vehicle':
+      return {
+        ...store,
+        vehicle: action.payload
+      };
+
+    case 'getVehicles':
+      return {
+        ...store,
+        vehicles: action.payload
+      };
+
     case 'deleteFav':
       return {
         ...store,
@@ -38,8 +69,7 @@ export default function storeReducer(store, action = {}) {
     case 'getData':
       return {
         ...store,
-        ...(action.payload || {})
+        data: action.payload
       }
-
   }
 }

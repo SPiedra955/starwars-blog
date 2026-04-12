@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import starwarsApi from "../services/starwarsApi.js"
 import starWars from "../assets/img/starwars.png"
+import { useNavigate } from "react-router-dom";
 
 export const Characters = () => {
-
+    const navigate = useNavigate()
 
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
         const params = 'people'
-        starwarsApi.getData(params).then(data => dispatch({
-            type: 'getData',
-            payload: {
-                people: data
-            }
-        }))
+
+        starwarsApi.getData(params).then(data => {
+            console.log("API DATA =>", data)
+            dispatch({
+                type: 'getData',
+                payload: data.results || data
+            })
+        })
     }, [])
 
     return (
@@ -29,9 +31,9 @@ export const Characters = () => {
                     padding: "10px 0"
                 }}
             >
-                {store.people?.map((ppl) => (
+                {store.data?.map((ppl) => (
                     <div
-                        key={ppl._id}
+                        key={ppl.uid}
                         style={{
                             minWidth: "250px",
                             flex: "0 0 auto",
@@ -48,7 +50,9 @@ export const Characters = () => {
                         <p className="text-start">Hair: {ppl.properties.hair_color}</p>
                         <p className="text-start">Eye Color: {ppl.properties.eye_color}</p>
                         <div className="d-flex justify-content-between">
-                            <button className="btn btn-outline-primary btn-sm">
+                            <button className="btn btn-outline-primary btn-sm"
+                                onClick={() => navigate(`/people/${ppl.uid}`)}
+                            >
                                 Learn More!
                             </button>
                             <button className="btn btn-outline-warning btn-sm text-warning"
