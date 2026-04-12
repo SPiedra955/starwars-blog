@@ -26,8 +26,8 @@ Add more files into your `./src/components` or styles folder as you need them an
 
 ### Pages
 
-Add more files into your `./js/pages` and import them in `./routes.jsx`.
-Each page must match at least one route inside `routes.jsx`
+Expected output
+- <image src="./src/assets/img/starwars.gif" alt="project">
 
 ### Centralized Store with useReducer
 
