@@ -6,13 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 export const Characters = () => {
     const navigate = useNavigate()
-
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
         const params = 'people'
-
         starwarsApi.getData(params).then(data => {
-            console.log("API DATA =>", data)
+            console.log("API DATA PEOPLE=>", data)
             dispatch({
                 type: 'getData',
                 payload: data.results || data
@@ -44,7 +42,7 @@ export const Characters = () => {
                             backgroundColor: "#f8f8f8"
                         }}
                     >
-                        <img src={starWars} style={{ width: '250px' }}></img>
+                        <img src={`https://github.com/breatheco-de/swapi-images/blob/master/public/images/people/${ppl.uid}.jpg?raw=true`} style={{ width: '250px' }}></img>
                         <h4 className="text-start mt-3">{ppl.properties.name}</h4>
                         <p className="text-start mt-4">Gender: {ppl.properties.gender}</p>
                         <p className="text-start">Hair: {ppl.properties.hair_color}</p>
@@ -55,15 +53,25 @@ export const Characters = () => {
                             >
                                 Learn More!
                             </button>
-                            <button className="btn btn-outline-warning btn-sm text-warning"
+                            <button
+                                className="btn btn-outline-warning btn-sm text-warning"
                                 onClick={(e) => {
-                                    e.preventDefault()
-                                    dispatch({
-                                        type: 'add_fav',
-                                        payload: ppl.properties.name
-                                    })
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    store.favorites.includes(ppl.properties.name)
+                                        ? dispatch({
+                                            type: "deleteFav",
+                                            payload: ppl.properties.name,
+                                        })
+                                        : dispatch({
+                                            type: "add_fav",
+                                            payload: ppl.properties.name,
+                                        });
                                 }}
-                            > 💛</button>
+                            >
+                                💛
+                            </button>
                         </div>
                     </div>
                 ))}

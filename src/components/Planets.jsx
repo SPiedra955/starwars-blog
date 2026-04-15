@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 export const Planets = () => {
     const navigate = useNavigate()
-
     const { store, dispatch } = useGlobalReducer()
     useEffect(() => {
         const params = 'planets'
@@ -41,7 +40,7 @@ export const Planets = () => {
                             backgroundColor: "#f8f8f8"
                         }}
                     >
-                        <img src={starWars} style={{ width: '250px' }}></img>
+                        <img src={`https://github.com/breatheco-de/swapi-images/blob/master/public/images/planets/${plan.uid}.jpg?raw=true`} style={{ width: '250px' }}></img>
                         <h4 className="text-start mt-3">{plan.properties.name}</h4>
                         <p className="text-start mt-4">Population: {plan.properties.population}</p>
                         <p className="text-start">Terrain: {plan.properties.terrain}</p>
@@ -51,16 +50,25 @@ export const Planets = () => {
                             >
                                 Learn More!
                             </button>
-                            <button className="btn btn-outline-warning btn-sm text-warning"
+                            <button
+                                className="btn btn-outline-warning btn-sm text-warning"
                                 onClick={(e) => {
-                                    e.preventDefault()
-                                    dispatch({
-                                        type: 'add_fav',
-                                        payload: plan.properties.name
-                                    })
-                                }
-                                }
-                            > 💛</button>
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    store.favorites.includes(plan.properties.name)
+                                        ? dispatch({
+                                            type: "deleteFav",
+                                            payload: plan.properties.name,
+                                        })
+                                        : dispatch({
+                                            type: "add_fav",
+                                            payload: plan.properties.name,
+                                        });
+                                }}
+                            >
+                                💛
+                            </button>
                         </div>
                     </div>
 
